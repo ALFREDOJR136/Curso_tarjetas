@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjetas Festival</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tarjetas Festival</h1>
+            <div class="mode-selector">
+                <button class="mode-btn active" id="btn-modo-usuario" onclick="cambiarModo('usuario')">👤 Modo Usuario</button>
+                <button class="mode-btn" id="btn-modo-admin" onclick="cambiarModo('admin')">🔧 Modo Administrador</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div id="message" class="message"></div>
+
+            <!-- MODO USUARIO -->
+            <div id="modo-usuario" class="section active">
+                <div class="card">
+                    <h3>💳 Seleccionar Tarjeta</h3>
+                    <div class="input-group">
+                        <label>Seleccione su tarjeta:</label>
+                        <select id="usuario-tarjeta-select">
+                            <option value="">-- Seleccione una tarjeta --</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-info" onclick="consultarSaldoUsuario()">🔍 Consultar Saldo</button>
+                </div>
+
+                <div id="saldo-display-usuario" style="display: none;" class="saldo-display">
+                    <h4>Saldo Actual</h4>
+                    <div class="saldo-amount" id="saldo-amount-usuario">€0.00</div>
+                    <div id="estado-tarjeta-usuario"></div>
+                </div>
+
+                <div class="card">
+                    <h3>🍔 Realizar Pago - Seleccione un Producto</h3>
+                    <div class="productos-grid" id="productos-grid"></div>
+                </div>
+            </div>
+
+            <!-- MODO ADMINISTRADOR -->
+            <div id="modo-admin" class="section">
+                <div class="evento-status">
+                    <h2>Estado del Evento: <span id="evento-estado-texto">No Iniciado</span></h2>
+                    <button class="btn btn-success" id="btn-iniciar-evento" onclick="iniciarEvento()">▶️ Activar Evento</button>
+                    <button class="btn btn-danger" id="btn-finalizar-evento" onclick="finalizarEvento()" style="display: none;">⏹️ Desactivar Evento</button>
+                </div>
+
+                <div class="card">
+                    <h3>➕ Gestión de Tarjetas</h3>
+                    <button class="btn btn-success" onclick="crearTarjetaAdmin()">🆕 Crear Nueva Tarjeta</button>
+                </div>
+
+                <div class="card">
+                    <h3>💵 Recargar Tarjeta</h3>
+                    <div class="input-group">
+                        <label>Seleccione tarjeta:</label>
+                        <select id="admin-recargar-select">
+                            <option value="">-- Seleccione una tarjeta --</option>
+                        </select>
+                    </div>
+                    <div class="inline-group">
+                        <div class="input-group">
+                            <label>Cantidad a recargar (€):</label>
+                            <input type="number" id="admin-recargar-cantidad" placeholder="0.00" step="0.01" min="0">
+                        </div>
+                        <button class="btn btn-success" onclick="recargarTarjetaAdmin()">➕ Recargar</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🔍 Consultar Saldo de Tarjeta</h3>
+                    <div class="input-group">
+                        <label>Seleccione tarjeta:</label>
+                        <select id="admin-consultar-select">
+                            <option value="">-- Seleccione una tarjeta --</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-info" onclick="consultarSaldoAdmin()">🔍 Consultar Saldo</button>
+                    <div id="saldo-display-admin" style="display: none;" class="saldo-display">
+                        <h4>Información de Tarjeta</h4>
+                        <div class="saldo-amount" id="saldo-amount-admin">€0.00</div>
+                        <div id="estado-tarjeta-admin"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Transacciones</h3>
+                    <button class="btn btn-info" onclick="verTransaccionesAdmin()">📊 Ver Todas las Transacciones</button>
+                    <div id="transacciones-container" class="transacciones-list"></div>
+                </div>
+
+                <div class="card">
+                    <h3>💳 Listado de Tarjetas</h3>
+                    <div id="tarjetas-container" class="tarjetas-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
